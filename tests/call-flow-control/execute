@@ -1,0 +1,28 @@
+#! /bin/bash
+#-----------------------------------------------------------------------------
+#  Base directory for test:
+
+base_dir="$(basename "$0")"
+
+#-----------------------------------------------------------------------------
+#  Expand PATH to include generated commands:
+
+export PATH="${base_dir}/../../bin:${PATH}"
+
+#-----------------------------------------------------------------------------
+
+compile configuration.spec
+
+#-----------------------------------------------------------------------------
+
+for expected in expected/*.ad?; do
+   if diff -q "${expected}" "${base_dir}/$(basename "${expected}")"; then
+      echo "${expected} o.k."
+   else
+      echo "Mismatch in ${expected}:"
+      diff -u "${expected}" "${base_dir}/$(basename "${expected}")"
+      exit 101
+   fi
+done
+
+#-----------------------------------------------------------------------------
