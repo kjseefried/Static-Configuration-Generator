@@ -1,0 +1,8 @@
+PROJECT=static_configuration_generator
+
+GENERATED_EXECUTABLES=compile
+
+GENERATED_SOURCES=ahven
+
+SCRIPTS=
+
